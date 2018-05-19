@@ -1,3 +1,6 @@
+import moment from 'moment';
+
+
 /*****************************************
  * Filter Expenses
  *
@@ -21,12 +24,9 @@ export default  (expenses,{text,sortBy,startDate,endDate}) => {
         //---- each to see
 
 
-        //--- If startDateMatch is not a number it's true, (user didnot put anything)
-        //-- Than check and see if startDateMatch is Create than created date, is so its true
-        const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
-
-        //--- EndDateMatch is the same logic as startDateMatch above.
-        const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+        const createdAtMoment = moment(expense.createdAt);
+        const startDateMatch = startDate ? startDate.isSameOrBefore(createdAtMoment,"day") : true;
+        const endDateMatch = endDate ? endDate.isSameOrAfter(createdAtMoment,"day") : true;
 
 
         //--- Test if text is a string than see if the text search passed in is a substring of the description field.

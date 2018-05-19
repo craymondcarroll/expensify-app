@@ -145,7 +145,20 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
  );
 ```
 
+- **Install Jest** for unit testing
+ + **yarn add jest**
+ + Create a package.json script called **test** with the command **jest**
+ ```markdown
+  "scripts": {
+    "serve-not-used": "live-server public/",
+    "build-babel-not-used": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "build-not-used": " webpack --watch",
+    "build": "webpack --mode development",
+    "dev-server": "webpack-dev-server  --mode development",
+    "test": "jest"
+  },
 
+```
 
 <br/><br/><br/>
 
