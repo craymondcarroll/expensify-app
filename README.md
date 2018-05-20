@@ -198,7 +198,7 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
 - Rename Directory name from **React-Boilerpage** to your project
 - Remove **.git** directory inside project 
 - Inside run **git init**
-- After run **git remote add origin <name of git project"**  Example:  **git@gitlab.bop.gov:raymond-sandbox/code-examples/javascript-react/expensify-app.git**
+- After run **git remote add origin <name of git project"**  
 - Then run 
  + **git add.**  
  + **git commint -m "My new project"**
