@@ -263,6 +263,10 @@ start: "node server/server.js"
  + public/bundle.js.map
  + public/styles.css
  + public.style.css.map
+ 
+ - Now we have to push git to Heroku
+  + git push heroku master
+  
 
 
 <br/><br/><br/>
