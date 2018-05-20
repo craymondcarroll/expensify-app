@@ -170,6 +170,100 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
 - We can tell webpack to break out CSS into its own files using the [Text Extract Plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)
  + **yarn add extract-text-webpack-plugin**
  
+- We now want to install **express**
+ + **yarn add express** 
+
+- create a server/seseserver.js with 
+
+```markdown
+const express = require('express');
+const path = require('path');
+
+//------------------------------
+// Create path to application
+// -----------------------------
+const publicPath = path.join(__dirname,'..','public');
+
+//-----------------------
+// Create Express object
+//-----------------------
+const app = express();
+
+//------------------------------------------
+// Tell express to use this path for docroot
+//-------------------------------------------
+ app.use( express.static(publicPath) );
+
+
+//--------------------------------
+// React is using a software router
+// and we need to tell express to
+// intercept and files/paths not found
+// and send to index.html and let React
+// handle it
+//---------------------------------------
+ app.get('*',(req, res) =>{
+  res.sendFile(path.join(publicPath, 'index.html'));
+ });
+
+
+//---------------------
+// Listen on port
+//---------------------
+app.listen(3000, () =>{
+   console.log("Server is up and running");
+   console.log("Document root is ", publicPath);
+});
+
+
+```
+
+- Install heroku cli, just google heroku cli.
+ + to test just type in **heroku --version**
+ + login from the terminal **heroku login**
+- Once authenticated we can create an app
+ + **heroku create <name of app>** 
+ + **heroku create my-expenses-app** This will also create a new git remote called **heroku**
+ + run git remote you will see 
+
+ ```markdown
+~/git/react/expensify-app$ git remote
+heroku
+origin
+raymond@
+```
+- We will use git remote to deploy to Heroku 
+- To run our app in Heroku we have to make some changes like telling Heroku how to start up the app
+- **Heroku will look in the package.json looking for a **start** script we have to create
+```markdown
+
+start: "node server/server.js" 
+```
+- We also need to create a couple of scripts that Heroku will look for in the package.json file 
+ + heroku-postbuild - this is where we will get heroku to run webpack
+ + heroku-prebuild - we will not take advantage of this
+ 
+```markdown
+
+  "scripts": {
+    "serve-not-used": "live-server public/",
+    "build-babel-not-used": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "build-not-used": " webpack --watch",
+    "build:dev": "webpack --mode development --env development",
+    "build:prod": "webpack --mode production --env production",
+    "dev-server": "webpack-dev-server  --mode development",
+    "start": "node server/server.js",
+    "heroku-postbuild": "yarn run build:prod",
+    "test": "jest"
+  },
+
+```
+- we also want to add a couple of files to the .gitignore file
+ + public/bundle.js
+ + public/bundle.js.map
+ + public/styles.css
+ + public.style.css.map
+
 
 <br/><br/><br/>
 
