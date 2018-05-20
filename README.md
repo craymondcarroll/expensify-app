@@ -160,6 +160,17 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
 
 ```
 
+- Modified Webpack to export configuration as a function [Webpack Configuration Types] (https://webpack.js.org/configuration/configuration-types/) this allows for determining if we are using development or production 
+```markdown
+
+    "build:dev": "webpack --mode development --env development",
+    "build:prod": "webpack --mode production --env production",
+```
+
+- We can tell webpack to break out CSS into its own files using the [Text Extract Plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)
+ + **yarn add extract-text-webpack-plugin**
+ 
+
 <br/><br/><br/>
 
 -------
