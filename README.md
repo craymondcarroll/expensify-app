@@ -145,6 +145,8 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
  );
 ```
 
+#### Testing ####
+
 - **Install Jest** for unit testing
  + **yarn add jest**
  + Create a package.json script called **test** with the command **jest**
@@ -160,6 +162,93 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
 
 ```
 
+- Install react-test-renderer to help create snapshots
+- Below is how to test a component before the use of Enzyme
+```markdown
+import React from 'react';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
+import Header from '../../components/Header';
+
+test('should render Header correctly', () => {
+     const renderer = new ReactShallowRenderer();
+
+    renderer.render(<Header />)
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+
+});
+
+```
+
+**Install Enzyme** 
+
+There are a couple of things we have to do to install enzyme to work with React 16
+- yarn add enzyme enzyme-adapter-react-16 raf --dev
+ + **raf** polyfill request animation frame 
+ 
+- To get Enzyme setup we will create a single file called **setupTest.js** and add:
+
+```markdown
+
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({
+   adapter: new Adapter()
+});
+
+``` 
+- to get more information go to Airbnb Enzyme page.
+- Now we have to configure Jest to work with Enzyme. [Facebook Jest](https://facebook.github.io/jest/docs/en/configuration.html) The idea is to have **Jest** run the **Enyme** setup file before running. 
+- We will setup a  json file for the jest setup in the root of the project called **jest.config.json**
+```markdown
+{
+  "setupFiles": [
+    "raf/polyfill",
+    "<rootDir>/src/tests/setupTests.js"
+  ]
+
+}
+
+```
+- We now have to update the package.json file and change the test script with ***"test": "jest --config=jest.config.json"***
+- Enzyme snapshot add a lot of Enzyme stuff that we really don't want so we want to install a utility wrapper that helps make it more like the React snapshot
+- **yarn add enzyme-to-json --dev** 
+- Example, toJSON will take enzyme snapshot and return a snapshot with just our component 
+```  expect(toJSON(wrapper)).toMatchSnapshot();```
+
+- We can make it so we don't have to add **toJSON(wrapper) every time by adding some configuration in the  **jest.config.json** we created
+```markdown
+{
+  "setupFiles": [
+    "raf/polyfill",
+    "<rootDir>/src/tests/setupTests.js"
+   ],
+
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+    ]
+}
+
+```
+- Now all we have to do is run a test like below 
+
+```markdown
+import React from 'react';
+import {shallow} from  'enzyme';
+import toJSON from 'enzyme-to-json';
+import Header from '../../components/Header';
+
+test('should render Header correctly', () => {
+    const wrapper = shallow(<Header />);
+    expect(wrapper).toMatchSnapshot();
+});
+
+```
+
+
+
+#### Preparing App for Production ####
+
 - Modified Webpack to export configuration as a function [Webpack Configuration Types] (https://webpack.js.org/configuration/configuration-types/) this allows for determining if we are using development or production 
 ```markdown
 
@@ -173,7 +262,7 @@ ReactDOM.render(<AdminInfo info="This are the details" />,document.getElementByI
 - We now want to install **express**
  + **yarn add express** 
 
-- create a server/seseserver.js with 
+- create a server/server.js with 
 
 ```markdown
 const express = require('express');
@@ -275,7 +364,10 @@ start: "node server/server.js"
 
 - We are now going to break-up package.json dependencies into **production** and **development**
 - If the node_modules folder is not there we can type **yarn install --production** and this will only install production dependencies.
-  
+
+
+- Add **Numeral JS** [Numeral JS] (http://numeraljs.com/)
+ + **yarn add numeral**   
   
 
 

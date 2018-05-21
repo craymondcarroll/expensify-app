@@ -12,7 +12,7 @@ import selectExpenses from '../selectors/expenses'
 // a new component is created.
 //-----------------------------------------------
 
-const ExpenseList = (props) => (
+export const ExpenseList = (props) => (
 
     <div>
         <h1>Expense List</h1>
@@ -50,3 +50,6 @@ export default connect(mapStateToProps)(ExpenseList);
 // We need to export the new Component that is created by React Redux HOC,
 //--------------------------------------------------------------------------
 // export default ConnectedExpenseList;
+
+
+
