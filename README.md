@@ -272,6 +272,9 @@ start: "node server/server.js"
  + this is our app url on heruko  
  + we can look at logs **heruko logs** this is useful for debugging
   
+
+- We are now going to break-up package.json dependencies into **production** and **development**
+- If the node_modules folder is not there we can type **yarn install --production** and this will only install production dependencies.
   
   
 
