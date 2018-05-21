@@ -264,8 +264,15 @@ start: "node server/server.js"
  + public/styles.css
  + public.style.css.map
  
- - Now we have to push git to Heroku
+- Now we have to push git to Heroku
   + git push heroku master
+
+- we will now get a url 
+ +  https://my-expenses-app.herokuapp.com/ 
+ + this is our app url on heruko  
+ + we can look at logs **heruko logs** this is useful for debugging
+  
+  
   
 
 
