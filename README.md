@@ -1,12 +1,26 @@
 ## Expenify App,  ##
 
-**I use this to as a template when creating and refactoring React Applications**
+**I use this to as a template when creating and refactoring React Applications** 
+
+- ** Modules of note we installed through out the project**, this is not the complete list and some may only been used for a little while.
+- I just wanted a place to store them for easy reference
+ + **Yarn**
+ + **Babel Core, Cli, Loader, Preset-Env, Reset-React, Transform Class Properties**
+ + **Webpack Core, Cli, Dev-Server, css-loader**
+ + **Live Server -- but Webpack Dev-Server Preferred**
+ + **Node-Sass**
+ + **Normalize.css**
+ + **React Dom, Modal**
+ + **Validator**
+ + **yarn add uuid** 
+ + **yarn add babel-plugin-transform-object-rest-spread**
 
 - Inintial application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
 
 - install **npm's uuid** for unique numbers until accessing database, this can be used to create unique ids
 
-- install Object spead operator plugin from babel, similar to array spread operator expect we have to install plugin
+- install the **Object spead operator plugin** for babel, similar to array spread operator expect we have to install plugin because it is not part of es6 yet as is the **array spread operator** 
+
  + yarn add babel-plugin-transform-object-rest-spread
  + add to .babelrc 
  
