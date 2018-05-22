@@ -30,10 +30,6 @@ export default class ExpenseForm extends React.Component {
     }
 
 
-
-
-
-
     /*******************************************
      *
      * @param e
@@ -51,14 +47,14 @@ export default class ExpenseForm extends React.Component {
      * Description: On Note Changed detected
      * @param e
      ****************************************/
-    onNoteChange = (e) =>{
-       const note = e.target.value;
+     onNoteChange = (e) =>{
+        const note = e.target.value;
 
-       this.setState( () => ({
-           note: note
-       }));
+        this.setState( () => ({
+            note: note
+        }));
 
-    };
+     };
 
 
     /******************************************
@@ -66,16 +62,16 @@ export default class ExpenseForm extends React.Component {
      *
      * @param e
      ******************************************/
-    onAmountChange = (e) => {
-      const amount = e.target.value;
+     onAmountChange = (e) => {
+       const amount = e.target.value;
 
-      if (amount == '' || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-         this.setState( () =>({
-            amount:amount
-         })) ;
-       }
+       if (amount == '' || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+          this.setState( () =>({
+             amount:amount
+          })) ;
+        }
 
-    };
+     };
 
 
     /****************************************

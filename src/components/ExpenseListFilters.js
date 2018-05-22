@@ -6,7 +6,6 @@ import {DateRangePicker} from 'react-dates';
 class ExpenseListFilters extends React.Component {
 
  constructor( props) {
-
      super(props);
 
      this.state = {
@@ -20,17 +19,16 @@ class ExpenseListFilters extends React.Component {
          this.props.dispatch(setEndDate(endDate));
 
          
-   };
+    };
 
-   onFocusChange = (calendarFocused) => {
+    onFocusChange = (calendarFocused) => {
 
      this.setState( ()=> ({
-       calendarFocused:calendarFocused
-
+        calendarFocused:calendarFocused
      }));
 
-     
-   } ;
+   };
+
 
     render() {
 
@@ -38,7 +36,7 @@ class ExpenseListFilters extends React.Component {
 
             <div>
                 <input type="text" value={this.props.filters.text} onChange={ (e) =>{
-                    props.dispatch(setTextFilter(e.target.value));
+                    this.props.dispatch(setTextFilter(e.target.value));
 
                 }}/>
 
