@@ -2,7 +2,7 @@
 
 **I use this to as a template when creating and refactoring React Applications**
 
--Inintial Application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
+- Inintial application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
 
 - install npd uuid for unique numbers until accessing database
 - install Object spead operator plugin from babel, similar to array spread operator expect we have to install plugin
