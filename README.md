@@ -1,6 +1,8 @@
-## Expenify App ##
+## Expenify App,  ##
 
-### Application created using defaults of React Boiler Plate. I copied the ReadMe and put it on the bottom of this README
+**I use this to as a template when creating and refactoring React Applications**
+
+-Inintial Application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
 
 - install npd uuid for unique numbers until accessing database
 - install Object spead operator plugin from babel, similar to array spread operator expect we have to install plugin
@@ -374,6 +376,9 @@ start: "node server/server.js"
 - Add **Numeral JS** [Numeral JS] (http://numeraljs.com/)
  + **yarn add numeral**   
   
+
+### Firebase Google Database ###
+
 
 
 <br/><br/><br/>
