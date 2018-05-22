@@ -9,6 +9,8 @@ import {setTextFilter,setEndDate,setStartDate,sortByAmount,sortByDate} from "./a
 import displayFilterExpenses from './selectors/expenses';
 import {Provider} from 'react-redux';
 
+import './firebase/firebase';
+
 
 
 const expStore = configureStore();

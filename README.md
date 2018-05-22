@@ -252,7 +252,7 @@ test('should render Header correctly', () => {
 
 ###Firebase Google Database###
 - [firebase.google.com](firebase.google.com)
-
+- yarn add firebase  
 
 
 
@@ -380,6 +380,7 @@ start: "node server/server.js"
   
 
 ### Firebase Google Database ###
+[Firebase](www.firebase.google.com)
 
 
 
