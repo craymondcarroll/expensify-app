@@ -4,10 +4,12 @@
 
 - Inintial application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
 
-- install npd uuid for unique numbers until accessing database
+- install **npm's uuid** for unique numbers until accessing database, this can be used to create unique ids
+
 - install Object spead operator plugin from babel, similar to array spread operator expect we have to install plugin
  + yarn add babel-plugin-transform-object-rest-spread
  + add to .babelrc 
+ 
  ```markdown
 
 {
