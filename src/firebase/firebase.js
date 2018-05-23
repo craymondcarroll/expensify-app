@@ -13,8 +13,31 @@ const config = {
 
 firebase.initializeApp(config);
 
+const database = firebase.database();
 
-firebase.database().ref().set({
-    name: 'C. Raymond Carroll'
 
+database.ref().set({
+    name: 'Johnny Quest',
+    age: 65,
+    isSingle: false,
+    location: {
+        city: 'Washington',
+        state: 'DC',
+       country: 'United States'
+    }
+}).then( ()=> {
+    console.log("The data successfully saved ");
+}).catch( (error)=> {
+    console.log("The following error occurred: ", error);
+})
+
+
+database.ref('age').set(41);
+database.ref('location/city').set('stafford');
+database.ref('location/state').set('VA');
+
+database.ref('attributes').set({
+    height: "5'9",
+    weight: 190
 });
+

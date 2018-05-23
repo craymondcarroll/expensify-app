@@ -1,21 +1,43 @@
 ## Expenify App,  ##
 
-**I use this to as a template when creating and refactoring React Applications** 
+**I use this to as a template when creating and re-factoring React Applications** 
 
-- ** Modules of note we installed through out the project**, this is not the complete list and some may only been used for a little while.
+- **Modules of note we installed through out the project**, this is not the complete list and some may only been used for a little while.
 - I just wanted a place to store them for easy reference
- + **Yarn**
- + **Babel Core, Cli, Loader, Preset-Env, Reset-React, Transform Class Properties**
- + **Webpack Core, Cli, Dev-Server, css-loader**
- + **Live Server -- but Webpack Dev-Server Preferred**
- + **Node-Sass**
- + **Normalize.css**
- + **React Dom, Modal**
- + **Validator**
- + **yarn add uuid** 
- + **yarn add babel-plugin-transform-object-rest-spread**
+ 
+	 + **Yarn**
+	 + **Babel Core, Cli, Loader, Preset-Env, Reset-React, Transform Class Properties**
+	 + **Webpack Core, Cli, Dev-Server, css-loader**
+	 + **Live Server -- but Webpack Dev-Server Preferred**
+	 + **Node-Sass**
+	 + **Normalize.css**
+	 + **React-dom, Modal**
+	 + **React-dates, react-redux, react-router,react-router-dom**
+	 + **style-loader**
+	 + **Validator**
+	 + **uuid** 
+	 + **babel-plugin-transform-object-rest-spread**
+	 + **numeral**
+	 + **express**
+	 + **sass-loader**
+	 + **redux**
+	 + **firebase**
+	 + **moment**
+	 + **node-sass**   
 
-- Inintial application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
+- Development Dependencies
+
+	 + **enzyme** 
+	 +  **enzyme-adapter-react-16**
+	 +  **enzyme-to-json**
+	 +  **jest**
+	 +  **live-server**
+	 +  **raf"**
+	 +  **react-test-renderer**
+	 +  **webpack-dev-server**
+	 +  
+
+- Initial application created using defaults of **React Boilerplate**. I copied the ReadMe and put it on the bottom of this README
 
 - install **npm's uuid** for unique numbers until accessing database, this can be used to create unique ids
 
@@ -24,19 +46,17 @@
  + yarn add babel-plugin-transform-object-rest-spread
  + add to .babelrc 
  
- ```markdown
-
+```
 {
   "presets":["env","react"],
   "plugins": ["transform-class-properties","transform-object-rest-spread"]
 }
-
 ```
 
-- **Object spread Operator**, similar to array spread operator, but more useful
+- **Object spread Operator**, similar to array spread operator, but more 
+useful
 
-```markdown
-
+```
 //-------------------
 // Test Object Spread Operator, which need babel plugin,
 // more used than array spread operator
@@ -264,10 +284,6 @@ test('should render Header correctly', () => {
 ```
 
 
-###Firebase Google Database###
-- [firebase.google.com](firebase.google.com)
-- yarn add firebase  
-
 
 
 #### Preparing App for Production ####
@@ -287,7 +303,7 @@ test('should render Header correctly', () => {
 
 - create a server/server.js with 
 
-```markdown
+```
 const express = require('express');
 const path = require('path');
 
@@ -393,9 +409,126 @@ start: "node server/server.js"
  + **yarn add numeral**   
   
 
-### Firebase Google Database ###
-[Firebase](www.firebase.google.com)
 
+
+
+###Firebase Google Database###
+- [firebase.google.com](firebase.google.com)
+- yarn add firebase@4.2.0 ``I added the laested  5.x but it was throwing errors on windows 7, but worked fine on Mac High Sierra``  
+
+- Below is the basic setup of Firebase
+```markdown
+import * as firebase from 'firebase';
+
+
+
+const config = {
+    apiKey: "#####",
+    authDomain: "expense-tracker-b9209.firebaseapp.com",
+    databaseURL: "https://expense-tracker-b9209.firebaseio.com",
+    projectId: "expense-tracker-b9209",
+    storageBucket: "expense-tracker-b9209.appspot.com",
+    messagingSenderId: "####"
+};
+
+firebase.initializeApp(config);
+
+const database = firebase().database();
+
+
+database().ref().set({
+    name: 'Johnny Quest',
+    age: 65,
+    isSingle: false,
+    location: {
+        city: 'Washington',
+        state: 'DC',
+        country: 'United States'
+
+    }
+
+});
+
+```
+
+- **database().ref()** mean the reference to a certain part of the database **similiar to tables** is a sql database.
+ + with **ref()** being empty mean the root of the firebase database
+- **.set() can take an **object** or just a **simple string** **.set("hi")** or **.set({name:raymond,age:45})**
+ + **.set() will over write data not update it. To update the data you need to get a ref to the data.
+ 
+ **Example**
+```
+ import * as firebase from 'firebase';
+
+
+firebase.initializeApp(config);
+const database = firebase().database();
+database().ref().set({
+    name: 'Johnny Quest',
+    age: 65,
+    isSingle: false,
+    location: {
+        city: 'Washington',
+        state: 'DC',
+        country: 'United States'
+
+});
+
+database().ref().set({
+ age:41
+});
+ 
+```
+- **The above will remove the entire object and we left with just age**
+
+- **To update just age we have to get a reference, look at below**
+
+```
+database().ref(age).set(41);
+```
+  
+- **We can get update other elements like below**
+
+```
+database.ref('age').set(41);
+
+database.ref('location/city').set('stafford');
+database.ref('location/state').set('VA');
+```
+
+#### ES6 Promises ####
+- The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
+- We will usually used Promises not create them.
+
+- Example of a Promises
+
+```
+const promise = new Promise( (resolve, reject) =>{
+    setTimeout( ()=> {
+        resolve('This is my resolved data');
+
+    },5000)
+});
+
+const promise2 = new Promise( (resolve, reject) =>{
+    setTimeout( ()=> {
+        resolve( {
+            name: 'Raymond',
+            age: 22,
+            shoesize: 12
+        });
+
+    },5000)
+});
+
+
+console.log('before');
+promise.then((data) => {
+    console.log(data);
+});
+console.log('after');
+
+```
 
 
 <br/><br/><br/>
