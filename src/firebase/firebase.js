@@ -3,19 +3,18 @@ import * as firebase from 'firebase';
 
 
 const config = {
-    apiKey: "AIzaSyB-U3pUpHo-n4FzYZiJmit_ldAuWyei6qI",
+    apiKey: "",
     authDomain: "expense-tracker-b9209.firebaseapp.com",
     databaseURL: "https://expense-tracker-b9209.firebaseio.com",
     projectId: "expense-tracker-b9209",
     storageBucket: "expense-tracker-b9209.appspot.com",
-    messagingSenderId: "567676521368"
+    messagingSenderId: ""
 };
 
 firebase.initializeApp(config);
 
 const database = firebase.database();
 
-/*
 
 
 
@@ -37,22 +36,9 @@ database.ref().set({
 })
 */
 
-database.ref("isSingle").set(true).then( ()=>{
-    console.log("Update worked");
-}).catch( (error) => {
 
-<<<<<<< HEAD
-   console.log("We be erroring");
-});
-
-*/
-
-
-/*database.ref('age').set(41);
-=======
 /*
 database.ref('age').set(41);
->>>>>>> 9398a007b80cc9d4c294f2533c61ddf93de8a466
 database.ref('location/city').set('stafford');
 database.ref('location/state').set('VA');
 
@@ -199,11 +185,11 @@ database.ref("expenses")
 
 const onExpenseChange = database.ref("expenses")
     .on('value', (SnapShot)=>{
-      const expenses = [];
+        const expenses = [];
         SnapShot.forEach( (childSnapShot)=>{
 
             expenses.push({
-              id:childSnapShot.key,
+                id:childSnapShot.key,
                 ...childSnapShot.val()
             });
         });
@@ -211,16 +197,8 @@ const onExpenseChange = database.ref("expenses")
         console.log(expenses);
 
     }, (e)=>{
-      console.log("Error Fetching: ",e);
+        console.log("Error Fetching: ",e);
 
     });
 
 
-*/
-
-database.ref('isSingle').remove().then( ()=>{
-    console.log("isSingle Removed successfully");
-}).catch( (error)=> {
-   console.log("Error: ", error) ;
-
-});
