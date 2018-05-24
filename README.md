@@ -531,6 +531,32 @@ console.log('after');
 ```
 
 
+- Exmaple of Update 
+
+```
+
+database.ref().update({
+   job: 'Manager',
+   'location/city': 'Boston'
+}).then( ()=>{
+    console.log("Update Worked");
+}).catch( (error) =>{
+    console.log("Dude, we have an error");
+
+});
+
+```
+
+- Firebase doesn't support list based objects, to get around this will will use **push**
+```
+database.ref().push({
+   tite: "my title",
+   body: "My body"
+})
+
+```
+
+
 <br/><br/><br/>
 
 -------
