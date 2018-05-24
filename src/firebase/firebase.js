@@ -3,18 +3,19 @@ import * as firebase from 'firebase';
 
 
 const config = {
-    apiKey: "",
+    apiKey: "AIzaSyB-U3pUpHo-n4FzYZiJmit_ldAuWyei6qI",
     authDomain: "expense-tracker-b9209.firebaseapp.com",
     databaseURL: "https://expense-tracker-b9209.firebaseio.com",
     projectId: "expense-tracker-b9209",
     storageBucket: "expense-tracker-b9209.appspot.com",
-    messagingSenderId: ""
+    messagingSenderId: "567676521368"
 };
 
 firebase.initializeApp(config);
 
 const database = firebase.database();
 
+/*
 
 database.ref().set({
     name: 'Johnny Quest',
@@ -31,8 +32,17 @@ database.ref().set({
     console.log("The following error occurred: ", error);
 })
 
+database.ref("isSingle").set(true).then( ()=>{
+    console.log("Update worked");
+}).catch( (error) => {
 
-database.ref('age').set(41);
+   console.log("We be erroring");
+});
+
+*/
+
+
+/*database.ref('age').set(41);
 database.ref('location/city').set('stafford');
 database.ref('location/state').set('VA');
 
@@ -41,3 +51,11 @@ database.ref('attributes').set({
     weight: 190
 });
 
+*/
+
+database.ref('isSingle').remove().then( ()=>{
+    console.log("isSingle Removed successfully");
+}).catch( (error)=> {
+   console.log("Error: ", error) ;
+
+});
