@@ -4,11 +4,9 @@ import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
-import {addExpense,removeExpense,editExpense} from "./actions/expenses";
-import {setTextFilter,setEndDate,setStartDate,sortByAmount,sortByDate} from "./actions/filters";
+import {startSetExpenses} from "./actions/expenses";
 import displayFilterExpenses from './selectors/expenses';
 import {Provider} from 'react-redux';
-
 import './firebase/firebase';
 
 
@@ -23,6 +21,8 @@ expStore.subscribe( () =>{
 });
 
 
+
+/*
 expStore.dispatch(addExpense({
         description:'Water Bill',
         note:"Jan bill",
@@ -48,7 +48,7 @@ expStore.dispatch(addExpense({
 
 }));
 
-
+*/
 
 // expStore.dispatch(setTextFilter("water"));
 
@@ -60,7 +60,14 @@ const jsx = (
 );
 
 
-ReactDOM.render(jsx,document.getElementById('app'));
+    ReactDOM.render(<p>Loading...</p>,document.getElementById('app'));
+
+        expStore.dispatch(startSetExpenses()).then( ()=>{
+
+         ReactDOM.render(jsx,document.getElementById('app'));
+
+        });
+
 
 
 

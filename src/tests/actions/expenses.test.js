@@ -1,5 +1,11 @@
-import {addExpense,editExpense,removeExpense} from "../../actions/expenses";
+import {addExpense,editExpense,removeExpense, startAddExpense} from "../../actions/expenses";
+import expenses from '../fixtures/expenses';
+import ConfigureMockStore from 'redux-mock-store';
+import configureStore from "../../store/configureStore";
 
+
+
+const createMockStore = configureStore([thunk]);
 
 
 test("Remove Expense Action Generator", ()=>{
@@ -43,19 +49,49 @@ test('Add Expense Action Generator', ()=>{
        createdAt: 1000
    };
 
-   const action = addExpense(data);
+   const action = addExpense(expenses[2]);
 
    expect(action).toEqual({
         type: 'ADD_EXPENSE',
-        expense: {
-          ...data,
-          id: expect.any(String)
-        }
+        expense: expenses[2]
    })
 
 });
 
 
+test('should add expense to database and store', (done) => {
+    const store = createMockStore({});
+    const expenseData = {
+        description: 'Mouse',
+        amount: 3000,
+        note: 'This one is better',
+        createdAt: 1000
+    };
+
+    store.dispatch(startAddExpense(expenseData)).then(() => {
+        expect(1).toBe(1);
+        done();
+    });
+});
+
+/*
+test('should add expense with defaults to database and store', () => {
+
+    const expenseData = {
+
+        description: 'mouse',
+        amount: 3000,
+        note: 'This is a mouse',
+        createdAt: 10000
+    };
+
+    const store = createMockStore({});
+    store.dispatch(startAddExpense(expenseData));
+
+});
+
+*/
+/*
 test('Add Expense Action, Default Values, ', () => {
 
     const action = addExpense();
@@ -75,4 +111,4 @@ test('Add Expense Action, Default Values, ', () => {
     });
 
 
-});
+});*/

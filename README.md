@@ -13,6 +13,7 @@
 	 + **Normalize.css**
 	 + **React-dom, Modal**
 	 + **React-dates, react-redux, react-router,react-router-dom**
+	 + **redux-mock-store**
 	 + **style-loader**
 	 + **Validator**
 	 + **uuid** 
@@ -21,6 +22,7 @@
 	 + **express**
 	 + **sass-loader**
 	 + **redux**
+	 + **redux-thunk**
 	 + **firebase**
 	 + **moment**
 	 + **node-sass**   
@@ -556,6 +558,8 @@ database.ref().push({
 
 ```
 
+
+- **Install Redux-Thunk** which will allow redux to dispatch function not just objects. By default Redux can only dispatch objects. But if want to use Firebase we want to dispatch functions.
 
 <br/><br/><br/>
 
