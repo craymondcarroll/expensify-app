@@ -7,8 +7,8 @@ import './styles/styles.scss'
 import {startSetExpenses} from "./actions/expenses";
 import displayFilterExpenses from './selectors/expenses';
 import {Provider} from 'react-redux';
-import './firebase/firebase';
-
+import {firebase} from './firebase/firebase';
+import LoginPage from './components/LoginPage'
 
 const expStore = configureStore();
 
@@ -60,15 +60,35 @@ const jsx = (
 );
 
 
+    //----------------------------------
+    // Let user know we are trying to
+    // get data
+    //----------------------------------
     ReactDOM.render(<p>Loading...</p>,document.getElementById('app'));
 
-        expStore.dispatch(startSetExpenses()).then( ()=>{
+    //----------------------------------
+    // Get Data and if everything is ok
+    // head to App Router to display app
+    //----------------------------------
+    expStore.dispatch(startSetExpenses()).then( ()=>{
+        ReactDOM.render(jsx,document.getElementById('app'));
+    });
 
-         ReactDOM.render(jsx,document.getElementById('app'));
 
-        });
+    //-----------------------------------
+    // Create Firebase Auth callback to
+    // when a user logs in or logs out
+    //-----------------------------------
 
+    firebase.auth().onAuthStateChanged( (user)=>{
 
+        if(user) {
+            console.log( "Logged in");
+        }else {
+            console.log("User Logged out");
+        }
+
+    });
 
 
 

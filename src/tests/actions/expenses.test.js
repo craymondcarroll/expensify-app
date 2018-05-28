@@ -2,11 +2,12 @@ import {addExpense,editExpense,removeExpense, startAddExpense} from "../../actio
 import expenses from '../fixtures/expenses';
 import ConfigureMockStore from 'redux-mock-store';
 import configureStore from "../../store/configureStore";
-
+import thunk from 'redux-thunk';
 
 
 const createMockStore = configureStore([thunk]);
 
+console.log(createMockStore);
 
 test("Remove Expense Action Generator", ()=>{
 
@@ -59,6 +60,7 @@ test('Add Expense Action Generator', ()=>{
 });
 
 
+/*
 test('should add expense to database and store', (done) => {
     const store = createMockStore({});
     const expenseData = {
@@ -69,10 +71,22 @@ test('should add expense to database and store', (done) => {
     };
 
     store.dispatch(startAddExpense(expenseData)).then(() => {
-        expect(1).toBe(1);
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'ADD_EXPENSE',
+            expense: {
+                id: expect.any(String),
+                ...expenseData
+            }
+        });
+
+        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+    }).then((snapshot) => {
+        expect(snapshot.val()).toEqual(expenseData);
         done();
     });
 });
+
 
 /*
 test('should add expense with defaults to database and store', () => {
