@@ -19,6 +19,8 @@ const person = {
 };
 
 
+
+
 //-- Object Destructing with a default value for company
 const {name, age,company = 'Unknown'} = person;
 console.log(`${name} is ${age}.`);

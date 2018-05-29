@@ -25,7 +25,8 @@
 	 + **redux-thunk**
 	 + **firebase**
 	 + **moment**
-	 + **node-sass**   
+	 + **node-sass**  
+	 + **yarn add history** 
 
 - Development Dependencies
 
@@ -560,6 +561,10 @@ database.ref().push({
 
 
 - **Install Redux-Thunk** which will allow redux to dispatch function not just objects. By default Redux can only dispatch objects. But if want to use Firebase we want to dispatch functions.
+
+
+- Install **history** this is needed to redirect to different pages that are not using react components. It we are just using components there is no need for this.
+
 
 <br/><br/><br/>
 

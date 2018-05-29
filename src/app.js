@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRouter from './routers/AppRouter'
+import AppRouter, {history} from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
@@ -20,7 +20,15 @@ expStore.subscribe( () =>{
     //console.log(filteredExpenses);
 });
 
+let hasRendered = false;
+const renderApp = () => {
 
+    if(!hasRendered) {
+        ReactDOM.render(jsx,document.getElementById('app'));
+        hasRendered = true;
+    }
+
+};
 
 /*
 expStore.dispatch(addExpense({
@@ -66,13 +74,6 @@ const jsx = (
     //----------------------------------
     ReactDOM.render(<p>Loading...</p>,document.getElementById('app'));
 
-    //----------------------------------
-    // Get Data and if everything is ok
-    // head to App Router to display app
-    //----------------------------------
-    expStore.dispatch(startSetExpenses()).then( ()=>{
-        ReactDOM.render(jsx,document.getElementById('app'));
-    });
 
 
     //-----------------------------------
@@ -83,9 +84,24 @@ const jsx = (
     firebase.auth().onAuthStateChanged( (user)=>{
 
         if(user) {
-            console.log( "Logged in");
+
+            //----------------------------------
+            // Get Data and if everything is ok
+            // head to App Router to display app
+            //----------------------------------
+            expStore.dispatch(startSetExpenses()).then( ()=>{
+
+                console.log("Data Retrieved");
+                renderApp();
+                if (history.location.pathname === '/' ){
+                    history.push("/dashboard");
+                }
+
+            });
+
         }else {
-            console.log("User Logged out");
+            renderApp();
+            history.push('/');
         }
 
     });
