@@ -8,7 +8,8 @@ export const startLogin = () => {
         // we didn't care there would be not reason
         // to use the return keyword here
         //-------------------------------------------
-        return firebase.auth().signInWithPopup(googleAuthProvider);
+    //    return firebase.auth().signInWithPopup(googleAuthProvider);
+         return firebase.auth().signInWithPopup(googleAuthProvider);
     };
 };
 
