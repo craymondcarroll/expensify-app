@@ -49,7 +49,9 @@ export const startAddExpense = (expenseData = {}) => {
 
     // this function get called internally by Redux
     // passing in dispatch
-    return (dispatch) =>{
+    return (dispatch,getState) =>{
+
+       const uid = getState().auth.uid;
 
         const  {
             description = '',
@@ -60,7 +62,7 @@ export const startAddExpense = (expenseData = {}) => {
 
         const expense = {description,note,amount,createdAt};
 
-        database.ref('expenses').push(expense)
+        database.ref(`users/${uid}/expenses`).push(expense)
             .then( (ref)=>{
                 dispatch(addExpense({
                     id:ref.key,
@@ -113,9 +115,11 @@ export const removeExpenseDeconst = ({id}) => ({
 export const startRemoveExpense = ({id}) =>  {
 
 
-    return (dispatch) => {
+    return (dispatch,getState) => {
 
-        database.ref(`expenses/${id}`).remove()
+        const uid = getState().auth.uid;
+
+        database.ref(`users/${uid}/expenses/${id}`).remove()
             .then( ()=>{
 
               dispatch(removeExpenseDeconst({id}));
@@ -151,8 +155,11 @@ export const editExpense = (id,updates) => ({
 
 export const startEditExpense=(id,expense) => {
 
-    return (dispatch) => {
-        database.ref(`expenses/${id}`).update({...expense})
+    return (dispatch,getState) => {
+
+        const uid = getState().auth.uid;
+
+        database.ref(`/users/${uid}/expenses/${id}`).update({...expense})
             .then( ()=>{
                 dispatch(editExpense(id,expense));
 
@@ -197,9 +204,11 @@ export const startSetExpenses = () => {
 
     const expenses =[];
 
-    return (dispatch) => {
+    return (dispatch,getState) => {
 
-      return database.ref("expenses").once("value").then( (snapshot) => {
+        const uid = getState().auth.uid;
+
+      return database.ref(`users/${uid}/expenses`).once("value").then( (snapshot) => {
 
          snapshot.forEach ( (childSnapshot) =>{
 
