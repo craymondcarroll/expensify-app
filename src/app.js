@@ -6,6 +6,7 @@ import 'normalize.css/normalize.css'
 import './styles/styles.scss'
 import {startSetExpenses} from "./actions/expenses";
 import displayFilterExpenses from './selectors/expenses';
+import {login,logout} from "./actions/auth";
 import {Provider} from 'react-redux';
 import {firebase} from './firebase/firebase';
 import LoginPage from './components/LoginPage'
@@ -85,13 +86,14 @@ const jsx = (
 
         if(user) {
 
+            expStore.dispatch(login(user.uid));
+            console.log("uid",user.uid);
             //----------------------------------
             // Get Data and if everything is ok
             // head to App Router to display app
             //----------------------------------
             expStore.dispatch(startSetExpenses()).then( ()=>{
 
-                console.log("Data Retrieved");
                 renderApp();
                 if (history.location.pathname === '/' ){
                     history.push("/dashboard");
@@ -100,6 +102,7 @@ const jsx = (
             });
 
         }else {
+            expStore.dispatch(logout({}))
             renderApp();
             history.push('/');
         }
