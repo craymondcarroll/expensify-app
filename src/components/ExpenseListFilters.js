@@ -39,25 +39,34 @@ class ExpenseListFilters extends React.Component {
                 <div className="input-group">
 
                     <div className="input-group__item">
-                        <input type="text" value={this.props.filters.text} onChange={e => {
-                            this.props.dispatch(setTextFilter(e.target.value));
+                        <input
+                            type="text"
+                            placeholder="Search Expenses"
+                            className="text-input"
+                            value={this.props.filters.text}
+                            onChange={e => {
+
+                                this.props.dispatch(setTextFilter(e.target.value));
                         }} />
                     </div>
 
                     <div className="input-group__item">
-                        <select value={this.props.filters.sortBy} onChange={e => {
-                            switch (e.target.value) {
-                                case "date":
-                                    this.props.dispatch(sortByDate());
+                        <select
+                            className="select"
+                            value={this.props.filters.sortBy}
+                            onChange={e => {
+                                switch (e.target.value) {
+                                    case "date":
+                                        this.props.dispatch(sortByDate());
 
-                                    break;
-                                case "amount":
-                                    this.props.dispatch(sortByAmount());
-                                    break;
+                                        break;
+                                    case "amount":
+                                        this.props.dispatch(sortByAmount());
+                                        break;
 
-                                default:
-                                    this.props.dispatch(sortByDate());
-                            }
+                                    default:
+                                        this.props.dispatch(sortByDate());
+                                }
                         }}>
                             <option value="date">Date</option>
                             <option value="amount">Amount</option>
