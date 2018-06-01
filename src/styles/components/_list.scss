@@ -53,6 +53,7 @@
 }
 
 .list-item__title {
+  margin: 0;
   word-break:break-all;
 }
 
@@ -65,10 +66,16 @@
 
 .list-item__data {
   margin: $s-size 0 0 0;
-
   @media (min-width: $desktop-breakpoint) {
     margin: 0;
     padding-left: $s-size;
   }
 }
 
+.list-item__desc {
+  margin-top: -10px;
+
+  @media (max-width: $desktop-breakpoint) {
+     line-height: .6rem;
+  }
+}
