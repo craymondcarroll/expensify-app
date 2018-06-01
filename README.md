@@ -26,7 +26,8 @@
 	 + **firebase**
 	 + **moment**
 	 + **node-sass**  
-	 + **yarn add history** 
+	 + **yarn add history**
+	 + **babel polyfill** 
 
 - Development Dependencies
 
@@ -567,6 +568,8 @@ database.ref().push({
 
 
 <br/><br/><br/>
+
+- Install **babel-polyfill** to support older browers.
 
 -------
 

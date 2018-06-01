@@ -10,6 +10,7 @@ import {login,logout} from "./actions/auth";
 import {Provider} from 'react-redux';
 import {firebase} from './firebase/firebase';
 import LoginPage from './components/LoginPage'
+import LoadingPage from './components/LoadingPage'
 
 const expStore = configureStore();
 
@@ -73,7 +74,7 @@ const jsx = (
     // Let user know we are trying to
     // get data
     //----------------------------------
-    ReactDOM.render(<p>Loading...</p>,document.getElementById('app'));
+    ReactDOM.render(<LoadingPage />,document.getElementById('app'));
 
 
 
@@ -82,7 +83,7 @@ const jsx = (
     // when a user logs in or logs out
     //-----------------------------------
 
-    firebase.auth().onAuthStateChanged( (user)=>{
+   firebase.auth().onAuthStateChanged( (user)=>{
 
         if(user) {
 
@@ -108,7 +109,6 @@ const jsx = (
         }
 
     });
-
 
 
 
