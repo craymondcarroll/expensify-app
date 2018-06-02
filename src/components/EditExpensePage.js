@@ -1,10 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import {startEditExpense,startRemoveExpense} from "../actions/expenses";
 import ExpenseForm from './ExpenseForm';
 
 
 const EditExpensePage = (props) => {
+
+    const confirmDelete = () => {
+
+        confirmAlert({
+
+            title: `Delete Expense`,
+            message: `Remove  ${props.expense.description}.`,
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {return true;}
+                },
+                {
+                    label: 'No',
+                    onClick: () => {return false;}
+                }
+            ]
+        });
+
+
+    }
+
+
 
     return (
 
@@ -19,16 +44,22 @@ const EditExpensePage = (props) => {
             <ExpenseForm
                 expense={props.expense}
                 onSubmit={ (expense) => {
+
                   props.dispatch(startEditExpense(props.expense.id, expense));
                   props.history.push('/');
               }}
             />
 
 
-            <button className="button button__secondary" onClick={ (e) =>{
+            <button className="button button__secondary" onClick={ (e) => {
 
-                props.dispatch(startRemoveExpense({id:props.expense.id}));
-                props.history.push('/');
+                const results = confirmDelete();
+
+                if (results) {
+                    props.dispatch(startRemoveExpense({id: props.expense.id}));
+                    props.history.push('/');
+              }
+
 
             }}>Remove Expense</button>
 
