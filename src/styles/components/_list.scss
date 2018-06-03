@@ -35,7 +35,6 @@
     flex-direction: row;
     justify-content: space-between;
     padding:$m-size;
-    line-height: 0.6rem;
   }
 
 }
@@ -72,10 +71,3 @@
   }
 }
 
-.list-item__desc {
-  margin-top: -10px;
-
-  @media (max-width: $desktop-breakpoint) {
-     line-height: .6rem;
-  }
-}

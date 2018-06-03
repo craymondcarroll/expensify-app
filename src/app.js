@@ -9,8 +9,8 @@ import displayFilterExpenses from './selectors/expenses';
 import {login,logout} from "./actions/auth";
 import {Provider} from 'react-redux';
 import {firebase} from './firebase/firebase';
-import LoginPage from './components/LoginPage'
 import LoadingPage from './components/LoadingPage'
+
 
 const expStore = configureStore();
 
@@ -19,7 +19,6 @@ const expStore = configureStore();
 expStore.subscribe( () =>{
     const state = expStore.getState();
     const filteredExpenses = displayFilterExpenses(state.expenses,state.filters);
-    //console.log(filteredExpenses);
 });
 
 let hasRendered = false;
@@ -38,24 +37,6 @@ expStore.dispatch(addExpense({
         note:"Jan bill",
         amount:4500,
         createdAt:1000
-}));
-
-
-expStore.dispatch(addExpense({
-    description:"Gas Bill",
-    note:"Jan Bill",
-    amount:1000,
-    createdAt: 22000
-
-}));
-
-
-expStore.dispatch(addExpense({
-    description:"Rent",
-    note:"March Rent was $10.00 than usual",
-    amount:10950,
-    createdAt: 2200
-
 }));
 
 */
@@ -88,7 +69,6 @@ const jsx = (
         if(user) {
 
             expStore.dispatch(login(user.uid));
-            console.log("uid",user.uid);
             //----------------------------------
             // Get Data and if everything is ok
             // head to App Router to display app

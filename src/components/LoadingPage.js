@@ -1,13 +1,19 @@
 import React from 'react';
+import Modal from 'react-modal';
 
 
 
-const LoadingPage = () => (
+const LoadingPage = () => {
 
-   <div className="loader">
-      <img className="loader__image" src="/images/loader.gif" />
-   </div>
 
-);
+        return(
+            <div className="loader">
+                <img className="loader__image" src="/images/loader.gif"/>
+            </div>
+
+        );
+
+
+}
 
 export default LoadingPage;
