@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {startEditExpense,startRemoveExpense} from "../actions/expenses";
 import ExpenseForm from './ExpenseForm';
-import AreYouSureModal from './AreYouSureModal';
+import ExpenseModal from './ExpenseModal';
 import Modal from "react-modal";
 
 
@@ -21,11 +21,24 @@ class EditExpensePage extends React.Component {
 
     }
 
-
+    //**************************************
+    // Calling this from dialog will just
+    // dialog without delete expense
+    //**************************************
     handleCloseModal = ()=> {
-
         this.setState ( ()=>({isModalOpened:false}));
-        console.log("Request to close");
+    }
+
+
+
+    //**************************************
+    // Calling this from dialog will delete
+    // Expense
+    //**************************************
+    handleDialogYesReponse = () => {
+        this.setState ( ()=>({isModalOpened:false}));
+        this.props.dispatch(startRemoveExpense({id: this.props.expense.id}));
+        this.props.history.push('/');
 
     }
 
@@ -54,11 +67,12 @@ class EditExpensePage extends React.Component {
                     />
 
 
-                    <button className="button button_danger" onClick={(e) => {
+                    <button className="button button__secondary" onClick={(e) => {
 
-                        const results = false;
-
-
+                        //-------------------------
+                        // Open Dialog and ask user if they really
+                        // want to delete expense
+                        //-------------------------
                         this.setState( ()=>({
                             isModalOpened:true,
                             modalMessage:`Delete Expense ${this.props.expense.description}?`
@@ -66,25 +80,16 @@ class EditExpensePage extends React.Component {
                         }));
 
 
-
-                        if (results) {
-                            this.props.dispatch(startRemoveExpense({id: props.expense.id}));
-                            this.props.history.push('/');
-                        }
-
-
                     }}>Remove Expense
                     </button>
 
                 </div>
 
-                <AreYouSureModal
+                <ExpenseModal
                     isOpen ={this.state.isModalOpened}
                     handleCloseModal = {this.handleCloseModal}
+                    handleDialogYesReponse = {this.handleDialogYesReponse}
                     modalMessage = {this.state.modalMessage}
-
-
-
                 />
 
             </div>
